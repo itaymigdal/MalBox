@@ -22,7 +22,7 @@ Because I prefer to have my malware analysis box customized according to my own 
 
 # What the script does
 
-1. Disables Windows Defender using [Defender-Control](https://github.com/qtkite/defender-control)
+1. Uninstalls Windows Defender using [Defender-Control](https://github.com/qtkite/defender-control)
 2. Disables automatic Windows updates
 3. Disables ASLR
 4. Sets file extensions and hidden files to be visible
