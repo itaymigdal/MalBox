@@ -2,7 +2,7 @@
 
 *Malbox is a quick and dirty setup to create a malware analysis VM.*
 
-<img src="/Wallpapers/4.png" width=50% height=50%>
+<img src="/Wallpapers/4.png" width=60% height=60%>
 
 # Why
 
