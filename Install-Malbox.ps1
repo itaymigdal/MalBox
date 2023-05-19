@@ -35,7 +35,7 @@ $TaskBarTools = @(
 
 )
 
-$Wallpaper = ".\Wallpapers\7.png" 
+$Wallpaper = ".\Wallpapers\4.png" 
 
 ################################
 ############ CONFIG ############
@@ -154,7 +154,7 @@ Write-Output "[*] Extracting MalBox archive to desktop..."
 Move-Item .\MalBox ~\Desktop
 Remove-Item -Recurse .\MalBoxSplitted
 
-# Pin tools of choise to the taskbar
+# Pin tools of choice to the taskbar
 foreach ($Tool in $TaskBarTools)
 {
   Pin-Tool -ToolName $Tool[0] -IsInMalBox $Tool[1]

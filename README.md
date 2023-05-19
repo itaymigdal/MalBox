@@ -1,6 +1,12 @@
 # MalBox
 
-Malbox is a quick and dirty setup to create a malware analysis VM.
+*Malbox is a quick and dirty setup to create a malware analysis VM.*
+
+<img src="/Wallpapers/4.png" width=50% height=50%>
+
+# Why
+
+Because I prefer to have my malware analysis box customized according to my own preferences. I found that existing setup tools often missed some steps or resulted in a messy outcome, which didn't sit well with my OCD.
 
 # Installation
 
@@ -8,12 +14,13 @@ Malbox is a quick and dirty setup to create a malware analysis VM.
 > Run the following stepts only inside the VM guest!
 2. Disable manually Windows Defender
 3. Download the repository
-4. `cd .\MalBox`
-5. `Set-ExecutionPolicy Unrestricted`
-6. `.\Install-MalBox.ps1`
-7. Go grab a coffee
+4. Open administrator Powershell prompt
+5. `cd .\MalBox`
+6. `Set-ExecutionPolicy Unrestricted`
+7. `.\Install-MalBox.ps1`
+8. Go grab a coffee
 
-# What the script does?
+# What the script does
 
 1. Disables Windows Defender using [Defender-Control](https://github.com/qtkite/defender-control)
 2. Disables automatic Windows updates
@@ -23,9 +30,12 @@ Malbox is a quick and dirty setup to create a malware analysis VM.
 6. Installs Chocolatey
 7. Installs Chocolatey packages (configurable in the script's config)
 8. Extracts MalBox archive to desktop
-9. Pin tools of choise to the taskbar using [PTTB](https://github.com/0x546F6D/pttb_-_Pin_To_TaskBar) (configurable in the script's config)
+9. Pin tools of choice to the taskbar using [PTTB](https://github.com/0x546F6D/pttb_-_Pin_To_TaskBar) (configurable in the script's config)
 10. Sets background wallpaper (configurable in the script's config)
-> Check the wallpapers directory for the awsome images created by Midjourney
+
+> Check the wallpapers directory for the awesome images created by Midjourney
+
+> Comment out any step according to your needs
 
 ## Chocolatey Packages
 
