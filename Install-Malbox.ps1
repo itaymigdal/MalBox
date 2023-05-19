@@ -14,7 +14,6 @@ $Packages = @(
   "fiddler",
   "wireshark",
   "microsoft-windows-terminal",
-  "brave",
   "upx",
   "7zip",
   "everything"

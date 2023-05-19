@@ -44,7 +44,6 @@ Because I prefer to have my malware analysis box customized according to my own 
 - Fiddler
 - Wireshark
 - Windows Terminal
-- Brave browser
 - UPX
 - 7-Zip
 - Everything
