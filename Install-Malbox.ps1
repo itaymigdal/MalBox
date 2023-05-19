@@ -8,6 +8,8 @@ $Packages = @(
   "python",
   "oraclejdk",
   "dotnet",
+  "dotnet-5.0-runtime",
+  "dotnet-5.0-sdk",
   "sublimetext3",
   "fiddler",
   "wireshark",
@@ -19,19 +21,18 @@ $Packages = @(
 )
 
 $TaskBarTools = @(
-  # (<Tool name>, <Is in MalBox dir>)
+  # (<Tool name>, <Location to search>)
 
-  ("ProcessHacker.exe", $true),       # Process Hacker
-  ("wt.exe", $false),                 # Windows Terminal
-  ("subl.exe", $false),               # Sublime Text3
-  ("hxd.exe", $true),                 # HxD
-  ("die.exe", $true),                 # Detect It Easy
-  ("pestudio.exe", $true)             # PEStudio
-  ("cutter.exe", $true),              # Cutter
-  ("ghidraRun.bat", $true),           # Ghidra
-  ("procmon64.exe", $true),           # Process Monitor
-  ("x96dbg.exe", $true),              # x64dbg (x32/x64)
-  ("dnSpy.exe", $true)                # dnSpyex
+  ("ProcessHacker.exe", "~\Desktop\MalBox"),    # Process Hacker
+  ("wt.exe", $env:LOCALAPPDATA),                # Windows Terminal
+  ("sublime_text.exe", $env:ProgramFiles),      # Sublime Text3
+  ("procmon64.exe", "~\Desktop\MalBox"),        # Process Monitor
+  ("hxd.exe", "~\Desktop\MalBox"),              # HxD
+  ("die.exe", "~\Desktop\MalBox"),              # Detect It Easy
+  ("pestudio.exe", "~\Desktop\MalBox")          # PEStudio
+  ("cutter.exe", "~\Desktop\MalBox"),           # Cutter
+  ("x96dbg.exe", "~\Desktop\MalBox"),           # x64dbg (x32/x64)
+  ("dnSpy.exe", "~\Desktop\MalBox")             # dnSpyex
 
 )
 
@@ -45,10 +46,9 @@ function Pin-Tool
 {
   param(
     [string] $ToolName,
-    [bool] $IsInMalBox # Is in MalBox Dir, rather than in path
+    [string] $Location
     )
-  if ($IsInMalBox) {$FindToolCommand = where.exe /F /R (Resolve-Path ~\Desktop\MalBox) $ToolName}
-  else {$FindToolCommand = where.exe $ToolName}
+  $FindToolCommand = where.exe /F /R (Resolve-Path $Location) $ToolName
   $ToolPath = (($FindToolCommand) -split "`n")[0]
   .\Utils\pttb.exe $ToolPath
 }
@@ -119,7 +119,11 @@ Start-Process ".\Utils\disable-defender.exe"
 
 # Disable Windows updates 
 Write-Output "[*] Disabling Windows updates..."
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name NoAutoUpdate -Value 1 -Force
+$RegPathWU = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU"
+if (!(Test-Path $RegPathWU)) {
+    New-Item -Path $RegPathWU -Force | Out-Null
+}
+Set-ItemProperty -Path $RegPathWU -Name NoAutoUpdate -Value 1 -Force
 
 # Disable ASLR
 Write-Output "[*] Disabling ASLR..."
@@ -157,8 +161,10 @@ Remove-Item -Recurse .\MalBoxSplitted
 # Pin tools of choice to the taskbar
 foreach ($Tool in $TaskBarTools)
 {
-  Pin-Tool -ToolName $Tool[0] -IsInMalBox $Tool[1]
+  Pin-Tool -ToolName $Tool[0] -Location $Tool[1]
 }
 
 # Set background wallpaper
-Set-WallPaper -Image (Resolve-Path $Wallpaper)
+Set-WallPaper -Image (Resolve-Path $Wallpaper) -Style Fit
+
+Write-Output "[!] All done!"

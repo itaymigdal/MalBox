@@ -12,7 +12,7 @@ Because I prefer to have my malware analysis box customized according to my own 
 
 1. Own a fresh Windows VM guest
 > Run the following stepts only inside the VM guest!
-2. Disable manually Windows Defender
+2. Disable manually Windows Defender (all switches)
 3. Download the repository
 4. Open administrator Powershell prompt
 5. `cd .\MalBox`
@@ -60,7 +60,6 @@ Because I prefer to have my malware analysis box customized according to my own 
 
 ### Dotnet
 - DnSpyex
-- ILSpy
 - De4dot
 - GarbageMan
 
