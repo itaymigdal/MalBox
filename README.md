@@ -16,7 +16,7 @@ Because I prefer to have my malware analysis box customized according to my own 
 3. Download the repository
 4. Open administrator Powershell prompt
 5. `cd .\MalBox`
-6. `Set-ExecutionPolicy Unrestricted`
+6. `Set-ExecutionPolicy Unrestricted -Force`
 7. `.\Install-MalBox.ps1`
 8. Go grab a coffee
 
@@ -97,6 +97,6 @@ Because I prefer to have my malware analysis box customized according to my own 
 - TCPView
 - WinObj
 
-# Tools that do it better than me
+# Similar projects that do it better than me
 - [Flare-VM](https://github.com/mandiant/flare-vm)
 - [Reverse Engineer's Toolkit](https://github.com/mentebinaria/retoolkit)
