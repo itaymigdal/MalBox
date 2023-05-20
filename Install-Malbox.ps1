@@ -23,7 +23,7 @@ $TaskBarTools = @(
   # (<Tool name>, <Location to search>)
 
   ("ProcessHacker.exe", "~\Desktop\MalBox"),    # Process Hacker
-  ("wt.exe", $env:LOCALAPPDATA),                # Windows Terminal
+  ("wt.exe", $env:ProgramFiles),                # Windows Terminal
   ("sublime_text.exe", $env:ProgramFiles),      # Sublime Text3
   ("procmon64.exe", "~\Desktop\MalBox"),        # Process Monitor
   ("hxd.exe", "~\Desktop\MalBox"),              # HxD
@@ -166,4 +166,4 @@ foreach ($Tool in $TaskBarTools)
 # Set background wallpaper
 Set-WallPaper -Image (Resolve-Path $Wallpaper) -Style Fit
 
-Write-Output "[!] All done!"
+Write-Output "[!] All done! please reboot."
