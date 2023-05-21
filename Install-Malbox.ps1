@@ -114,7 +114,9 @@ public class Params
 
 # Disable Defender
 Write-Output "[*] Disabling Windows Defender..."
-Start-Process ".\Utils\disable-defender.exe"
+$DisableDefender = Resolve-Path ".\Utils\disable-defender.exe"
+Unblock-File $DisableDefender
+Start-Process $DisableDefender
 
 # Disable Windows updates 
 Write-Output "[*] Disabling Windows updates..."
