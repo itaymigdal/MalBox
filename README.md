@@ -11,7 +11,7 @@ Because I prefer to have my malware analysis box customized according to my own 
 # Installation
 
 1. Own a fresh Windows VM guest
-> Run the following stepts only inside the VM guest!
+> Run the following steps only inside the VM guest!
 2. Disable manually Windows Defender (all switches)
 3. Download the repository
 4. Open administrator Powershell prompt
