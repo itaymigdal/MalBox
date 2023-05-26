@@ -13,7 +13,6 @@ $Packages = @(
   "sublimetext3",
   "fiddler",
   "wireshark",
-  "microsoft-windows-terminal",
   "upx",
   "7zip",
   "everything"
@@ -23,7 +22,6 @@ $TaskBarTools = @(
   # (<Tool name>, <Location to search>)
 
   ("ProcessHacker.exe", "~\Desktop\MalBox"),    # Process Hacker
-  ("wt.exe", $env:ProgramFiles),                # Windows Terminal
   ("sublime_text.exe", $env:ProgramFiles),      # Sublime Text3
   ("procmon64.exe", "~\Desktop\MalBox"),        # Process Monitor
   ("hxd.exe", "~\Desktop\MalBox"),              # HxD

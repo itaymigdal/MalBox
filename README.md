@@ -43,7 +43,6 @@ Because I prefer to have my malware analysis box customized according to my own 
 - Sublime Text 3
 - Fiddler
 - Wireshark
-- Windows Terminal
 - UPX
 - 7-Zip
 - Everything
