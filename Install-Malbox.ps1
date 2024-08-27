@@ -64,9 +64,9 @@ $MalboxTools = @(
   ("upx.exe", "Utils & Misc", $false, ""),
   ("Autoruns64.exe", "Utils & Misc", $true, ""),
   ("tcpview64.exe", "Utils & Misc", $true, ""),
-  ("sigcheck.exe", "Utils & Misc", $true, ""),
+  ("sigcheck.exe", "Utils & Misc", $false, ""),
   ("Winobj.exe", "Utils & Misc", $true, ""),
-  ("floss.exe", "Utils & Misc", $true, "")
+  ("floss.exe", "Utils & Misc", $false, "")
 )
 
 $TaskBarTools = @(
