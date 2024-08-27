@@ -183,7 +183,6 @@ public class Params
   $ret = [Params]::SystemParametersInfo($SPI_SETDESKWALLPAPER, 0, $Image, $fWinIni)
 }
 
-
 # Disable Defender
 Write-Output "[*] Disabling Windows Defender..."
 $DisableDefender = Resolve-Path ".\Utils\disable-defender.exe"
@@ -203,6 +202,7 @@ Write-Output "[*] Disabling ASLR..."
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" -Name "MoveImages" -Value 0 -Type DWORD -Force
 
 # Disable UAC
+Write-Output "[*] Disabling UAC..."
 Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System' -Name 'EnableLUA' -Value 0 -Type DWORD -Force
 
 # Show file extensions
@@ -235,6 +235,7 @@ Move-Item .\MalBox ~\Desktop
 Remove-Item .\MalBox.zip
 
 # Copy tools to Malbox dir
+Write-Output "[*] Copying tools to Malbox directory..."
 foreach ($Tool in $MalboxTools)
 {
     if ($Tool[3] -eq "") 
@@ -248,12 +249,14 @@ foreach ($Tool in $MalboxTools)
 }
 
 # Pin tools of choice to the taskbar
+Write-Output "[*] Pinning tools to taskbar..."
 foreach ($Tool in $TaskBarTools)
 {
   Pin-Tool -ToolName $Tool[0] -Location $Tool[1]
 }
 
 # Set background wallpaper
+Write-Output "[*] Setting Malbox wallpaper..."
 Set-WallPaper -Image (Resolve-Path $Wallpaper) -Style Fit
 
 # Done
