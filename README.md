@@ -50,7 +50,7 @@ Because I prefer to have my malware analysis box customized according to my own 
 ## Tools In Archive
 
 ### Debuggers
-- x64dbg + plugins
+- x64dbg
   
 ### Disassemblers & Decompilers
 - Ghidra
@@ -58,7 +58,6 @@ Because I prefer to have my malware analysis box customized according to my own 
 
 ### Dotnet
 - DnSpyex
-- De4dot
 - GarbageMan
 
 ### Hex Viewers
@@ -74,10 +73,9 @@ Because I prefer to have my malware analysis box customized according to my own 
 
 ### Process Monitors
 - API Monitor
-- Process Hacker
+- System Informer (Process Hacker)
 - Hollows-Hunter
 - PE-Sieve
-- Process Explorer
 - Process Monitor
 
 ### Utils & Misc
@@ -86,12 +84,10 @@ Because I prefer to have my malware analysis box customized according to my own 
 - Autoruns
 - Blob Runner
 - CMDWatcher
-- Dll 2 Exe
 - PE Unmapper
 - SigCheck
-- Strings
 - Floss
-- TCPView
+- TCP Viewer
 - WinObj
 
 # Similar projects that do it better than me

@@ -10,34 +10,107 @@ $Packages = @(
   "dotnet",
   "dotnet-5.0-runtime",
   "dotnet-5.0-sdk",
+  "dotnet3.5",
   "sublimetext3",
   "fiddler",
   "wireshark",
   "upx",
   "7zip",
-  "everything"
+  "everything",
+  "x64dbg.portable",
+  "cutter",
+  "ghidra",
+  "dnspyex",
+  "hxd",
+  "imhex",
+  "die",
+  "explorersuite",
+  "pebear",
+  "pestudio",
+  "reshack.porable",
+  "apimonitor",
+  "systeminformer-nightlybuilds",
+  "hollowshunter",
+  "pesieve",
+  "procmon",
+  "tcpview",
+  "winobj",
+  "cyberchef",
+  "autoruns",
+  "sigcheck",
+  "floss"
+)
+
+$MalboxTools = @(
+  # (<Tool name>, <Malbox folder>, <Is shortcut>, <install location>)
+
+  ("x96dbg.exe", "Debuggers", $true, ""),
+  ("ghidraRun.bat", "Disassemblers & Decompilers", $true, ""),
+  ("cutter.exe", "Disassemblers & Decompilers", $true, ""),
+  ("dnSpy.exe", "Dotnet", $true, ""),
+  ("imhex-gui.exe", "Hex Viewers", $true, ""),
+  ("hxd.exe", "Hex Viewers", $true, "$env:ProgramFiles\hxd"),
+  ("die.exe", "PE Analyzers", $true, ""),
+  ("PE-bear.exe", "PE Analyzers", $true, ""),
+  ("pestudio.exe", "PE Analyzers", $true, ""),
+  ("ResourceHacker.exe", "PE Analyzers", $true, "$env:ProgramFiles (x86)\Resource Hacker"),
+  ("SystemInformer.exe", "Process Monitors & Scanners", $true, "$env:ProgramFiles\SystemInformer"),
+  ("apimonitor-x64.exe", "Process Monitors & Scanners", $true, ""),
+  ("apimonitor-x86.exe", "Process Monitors & Scanners", $true, ""),
+  ("pe-sieve.exe", "Process Monitors & Scanners", $false, ""),
+  ("hollows_hunter.exe", "Process Monitors & Scanners", $false, ""),
+  ("procmon64.exe", "Process Monitors & Scanners", $true, ""),
+  ("cyberchef.lnk", "Utils & Misc", $true, "~\Desktop"),
+  ("upx.exe", "Utils & Misc", $false, ""),
+  ("Autoruns64.exe", "Utils & Misc", $true, ""),
+  ("tcpview64.exe", "Utils & Misc", $true, ""),
+  ("sigcheck.exe", "Utils & Misc", $true, ""),
+  ("Winobj.exe", "Utils & Misc", $true, ""),
+  ("floss.exe", "Utils & Misc", $true, "")
 )
 
 $TaskBarTools = @(
   # (<Tool name>, <Location to search>)
 
-  ("ProcessHacker.exe", "~\Desktop\MalBox"),    # Process Hacker
-  ("sublime_text.exe", $env:ProgramFiles),      # Sublime Text3
-  ("procmon64.exe", "~\Desktop\MalBox"),        # Process Monitor
-  ("hxd.exe", "~\Desktop\MalBox"),              # HxD
-  ("die.exe", "~\Desktop\MalBox"),              # Detect It Easy
-  ("pestudio.exe", "~\Desktop\MalBox")          # PEStudio
-  ("cutter.exe", "~\Desktop\MalBox"),           # Cutter
-  ("x96dbg.exe", "~\Desktop\MalBox"),           # x64dbg (x32/x64)
-  ("dnSpy.exe", "~\Desktop\MalBox")             # dnSpyex
-
+  ("SystemInformer.exe.lnk", "~\Desktop\MalBox"),   # Process Hacker
+  ("sublime_text.exe", $env:ProgramFiles),          # Sublime Text3
+  ("procmon64.exe.lnk", "~\Desktop\MalBox"),        # Process Monitor
+  ("hxd.exe.lnk", "~\Desktop\MalBox"),              # HxD
+  ("die.exe.lnk", "~\Desktop\MalBox"),              # Detect It Easy
+  ("pestudio.exe.lnk", "~\Desktop\MalBox")          # PEStudio
+  ("cutter.exe.lnk", "~\Desktop\MalBox"),           # Cutter
+  ("x96dbg.exe.lnk", "~\Desktop\MalBox"),           # x64dbg (x32/x64)
+  ("dnSpy.exe.lnk", "~\Desktop\MalBox")             # dnSpyex
 )
 
-$Wallpaper = ".\Wallpapers\4.png" 
+$Wallpaper = ".\Wallpapers\6.png"
 
 ################################
 ############ CONFIG ############
 ################################
+
+Function Create-LnkInMalboxDir 
+{
+  param(
+    [string] $SrcDir = "$($env:ProgramData)\chocolatey\lib\",
+    [string] $ToolName,
+    [string] $TrgMalboxDir,
+    [boolean] $Shortcut
+    )
+    $FindToolCommand = where.exe /R (Resolve-Path $SrcDir) $ToolName
+    $ToolPath = (($FindToolCommand) -split "`n")[0]
+    $TrgMalboxDir = Resolve-Path ("~\Desktop\MalBox\" + $TrgMalboxDir)
+    if (-not ($Shortcut)) 
+    {
+        New-Item -Type SymbolicLink -Value (Resolve-Path $ToolPath) -Path "$($TrgMalboxDir)\$($ToolName)"
+    }
+    else 
+    {
+        $lnk = (New-Object -COM WScript.Shell).CreateShortcut("$($TrgMalboxDir)\$($ToolName).lnk")
+        $lnk.TargetPath=(Resolve-Path $ToolPath).Path
+        $lnk.Save()
+    }
+}
 
 function Pin-Tool
 {
@@ -110,6 +183,7 @@ public class Params
   $ret = [Params]::SystemParametersInfo($SPI_SETDESKWALLPAPER, 0, $Image, $fWinIni)
 }
 
+
 # Disable Defender
 Write-Output "[*] Disabling Windows Defender..."
 $DisableDefender = Resolve-Path ".\Utils\disable-defender.exe"
@@ -127,6 +201,9 @@ Set-ItemProperty -Path $RegPathWU -Name NoAutoUpdate -Value 1 -Force
 # Disable ASLR
 Write-Output "[*] Disabling ASLR..."
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" -Name "MoveImages" -Value 0 -Type DWORD -Force
+
+# Disable UAC
+Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System' -Name 'EnableLUA' -Value 0 -Type DWORD -Force
 
 # Show file extensions
 Write-Output "[*] Setting file extension visible..."
@@ -153,9 +230,22 @@ Invoke-Expression $ChocoInstallCmd
 
 # Extract MalBox archive to desktop
 Write-Output "[*] Extracting MalBox archive to desktop..."
-7z.exe x .\MalBoxSplitted
+7z.exe x .\MalBox.zip
 Move-Item .\MalBox ~\Desktop
-Remove-Item -Recurse .\MalBoxSplitted
+Remove-Item .\MalBox.zip
+
+# Copy tools to Malbox dir
+foreach ($Tool in $MalboxTools)
+{
+    if ($Tool[3] -eq "") 
+    {
+        Create-LnkInMalboxDir -ToolName $Tool[0] -TrgMalboxDir $Tool[1] -Shortcut $Tool[2]
+    }
+    else 
+    {
+        Create-LnkInMalboxDir -ToolName $Tool[0] -TrgMalboxDir $Tool[1] -Shortcut $Tool[2] -SrcDir (Resolve-Path $Tool[3])
+    }
+}
 
 # Pin tools of choice to the taskbar
 foreach ($Tool in $TaskBarTools)
@@ -166,4 +256,5 @@ foreach ($Tool in $TaskBarTools)
 # Set background wallpaper
 Set-WallPaper -Image (Resolve-Path $Wallpaper) -Style Fit
 
+# Done
 Write-Output "[!] All done! please reboot."
