@@ -1,6 +1,6 @@
 # MalBox
 
-*Malbox is a quick and dirty setup to create a malware analysis VM.*
+*Malbox is a quick and dirty setup to create a malware analysis VM (but the way I like)*
 
 <img src="/Wallpapers/4.png" width=60% height=60%>
 
@@ -18,20 +18,22 @@ Because I prefer to have my malware analysis box customized according to my own 
 5. `cd .\MalBox`
 6. `Set-ExecutionPolicy Unrestricted -Force`
 7. `.\Install-MalBox.ps1`
-8. Go grab a coffee
+8. Go grab a ~~coffee~~ meal
 
 # What the script does
 
 1. Uninstalls Windows Defender using [Defender-Control](https://github.com/qtkite/defender-control)
 2. Disables automatic Windows updates
 3. Disables ASLR
-4. Sets file extensions and hidden files to be visible
-5. Extends the trial period of Windows (so it won't reboot every 10 minutes)
-6. Installs Chocolatey
-7. Installs Chocolatey packages (configurable in the script's config)
-8. Extracts MalBox archive to desktop
-9. Pin tools of choice to the taskbar using [PTTB](https://github.com/0x546F6D/pttb_-_Pin_To_TaskBar) (configurable in the script's config)
-10. Sets background wallpaper (configurable in the script's config)
+4. Disables UAC
+5. Sets file extensions and hidden files to be visible
+6. Extends the trial period of Windows (so it won't reboot every 10 minutes)
+7. Installs Chocolatey
+8. Installs Chocolatey packages (configurable in the script's config)
+9. Extracts MalBox archive to desktop
+10. Adds (sym)links to Malbox directory
+11. Pins tools of choice to the taskbar using [PTTB](https://github.com/0x546F6D/pttb_-_Pin_To_TaskBar) (configurable in the script's config)
+12. Sets background wallpaper (configurable in the script's config)
 
 > Check the wallpapers directory for the awesome images created by Midjourney
 
